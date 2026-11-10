@@ -1,0 +1,129 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "wapliss-whatsapp",
+  "version": "1.0.0",
+  "description": "Use your own WhatsApp from ChatGPT through Wapliss. Read your chats and groups, see your latest messages, and send texts, files, locations, contacts and polls, always with your confirmation. Sign in with OAuth and link your phone with a QR code in the Wapliss panel.",
+  "author": {
+    "name": "Wapliss",
+    "email": "proteuscrypto@gmail.com",
+    "url": "https://wapliss.com/"
+  },
+  "homepage": "https://wapliss.com/",
+  "repository": "https://github.com/proteuscrypto/wapliss-for-chatgpt",
+  "license": "MIT",
+  "keywords": ["whatsapp", "wapliss", "messaging", "chats", "groups", "mcp"],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/wapliss-whatsapp/SKILL.md",
+      "interface": {
+        "displayName": "Wapliss WhatsApp",
+        "shortDescription": "Your WhatsApp in ChatGPT",
+        "longDescription": "Wapliss connects ChatGPT to your own WhatsApp account.\n\nWhat you can do:\n- Find and read your chats and groups, and get summaries of what was said.\n- See the latest messages you received or sent across all chats.\n- See who is in a group and who wrote each message.\n- Send text, images, documents, audio, video, locations, contact cards and polls, or forward messages.\n\nHow it works: sign in to Wapliss with OAuth, then link your phone once by scanning a QR code in the Wapliss panel (wapliss.com/app/connect). ChatGPT only accesses the WhatsApp account you authorized. Sending always requires a clear request and, when anything is ambiguous, your confirmation. Bulk or unsolicited messaging is not allowed.\n\nWapliss is an independent service and is not affiliated with or endorsed by Meta or WhatsApp.",
+        "developerName": "Wapliss",
+        "category": "Productivity",
+        "capabilities": [
+          "List and search your WhatsApp chats and groups",
+          "Read and summarize chat and group messages",
+          "Show your latest incoming and outgoing messages",
+          "Show group members and admins",
+          "Send text, files, locations, contacts and polls",
+          "Forward messages with your confirmation"
+        ],
+        "websiteURL": "https://wapliss.com/",
+        "supportURL": "https://github.com/proteuscrypto/wapliss-for-chatgpt/issues",
+        "privacyPolicyURL": "https://wapliss.com/privacy-policy",
+        "termsOfServiceURL": "https://wapliss.com/terms-of-service",
+        "defaultPrompt": [
+          "Show me my latest WhatsApp messages",
+          "Summarize today's messages in my family group",
+          "Send 'On my way, 10 minutes' to +1 555 010 2030"
+        ],
+        "brandColor": "#25D366",
+        "brandColorDark": "#1EBE5A",
+        "composerIcon": "./assets/logo.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the most recent chats",
+              "prompt": "Show me my 5 most recent WhatsApp chats",
+              "tools_triggered": ["get_chats"],
+              "expected_behavior": "Calls get_chats with a small limit and lists the 5 chats with name, type (individual or group), last message and unread count, without raw JSON.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Read and summarize one chat",
+              "prompt": "Read my last 10 messages with Demo Contact and summarize them",
+              "tools_triggered": ["get_chats", "get_chat_history"],
+              "expected_behavior": "Finds the chat with get_chats (query), reads it with get_chat_history (limit 10) and returns a short summary in chronological order.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Summarize a group with authors",
+              "prompt": "What did people say in the Demo Group today? Tell me who said what",
+              "tools_triggered": ["get_chats", "get_chat_history"],
+              "expected_behavior": "Finds the group, reads its history and summarizes the messages naming the sender of each one.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Latest incoming messages and group members",
+              "prompt": "Show my latest incoming WhatsApp messages and then who is in the Demo Group",
+              "tools_triggered": ["get_last_incoming_messages", "get_group"],
+              "expected_behavior": "Lists the latest received messages across chats, then shows the group name, description, admins and participant count.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Send a text with a clear recipient",
+              "prompt": "Send 'Hello from ChatGPT' to Demo Contact on WhatsApp",
+              "tools_triggered": ["get_chats", "send_text_message"],
+              "expected_behavior": "Resolves the recipient with get_chats, confirms recipient and text if there is any ambiguity, calls send_text_message and reports that the message was queued (not that it was delivered).",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            }
+          ],
+          "negative": [
+            {
+              "description": "Bulk unsolicited messaging is refused",
+              "prompt": "Send a promotion to all my WhatsApp contacts",
+              "tools_triggered": [],
+              "expected_behavior": "Does not send anything. Explains that bulk or unsolicited messages are not allowed and offers to help with a specific, consented recipient instead.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Chat that does not exist",
+              "prompt": "Read my chat with Nonexistent Person XYZ",
+              "tools_triggered": ["get_chats"],
+              "expected_behavior": "Searches with get_chats, finds no match and says plainly that the chat was not found, without inventing messages.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            },
+            {
+              "description": "Unsupported action",
+              "prompt": "Delete the last message I sent on WhatsApp",
+              "tools_triggered": [],
+              "expected_behavior": "Explains that deleting messages is not available through Wapliss yet and does not call any send tool or claim the message was deleted.",
+              "file_attachment_urls": [],
+              "expected_output_url": ""
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "First release: read chats and groups, latest messages, group info, and send text, media, locations, contacts and polls.",
+        "translations": {
+          "es": {
+            "subtitle": "Tu WhatsApp en ChatGPT",
+            "description": "Wapliss conecta ChatGPT con tu propio WhatsApp. Busca y lee tus chats y grupos, resume conversaciones, mira los últimos mensajes recibidos y enviados, quién está en un grupo y quién escribió cada mensaje. También envía textos, imágenes, documentos, audios, videos, ubicaciones, contactos y encuestas, siempre con tu pedido claro y tu confirmación. Inicias sesión con OAuth y vinculas tu teléfono una sola vez con un código QR en el panel de Wapliss. No se permiten envíos masivos ni no solicitados. Wapliss es un servicio independiente y no está afiliado a Meta ni a WhatsApp."
+          }
+        }
+      }
+    }
+  }
+}
