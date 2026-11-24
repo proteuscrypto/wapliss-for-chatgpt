@@ -9,7 +9,7 @@ description: >
   from Laura", "What did they say in the family group?", "Check my Wapliss
   account", "Connect Wapliss to ChatGPT".
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Wapliss WhatsApp

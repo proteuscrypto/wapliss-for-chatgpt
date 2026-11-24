@@ -1,11 +1,11 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wapliss-whatsapp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Use your own WhatsApp from ChatGPT through Wapliss. Read your chats and groups, see your latest messages, and send texts, files, locations, contacts and polls, always with your confirmation. Sign in with OAuth and link your phone with a QR code in the Wapliss panel.",
   "author": {
-    "name": "Wapliss",
-    "email": "proteuscrypto@gmail.com",
+    "name": "NetDigitalTech LLC",
+    "email": "commerce@netdigitaltech.com",
     "url": "https://wapliss.com/"
   },
   "homepage": "https://wapliss.com/",
@@ -26,7 +26,7 @@
         "displayName": "Wapliss WhatsApp",
         "shortDescription": "Your WhatsApp in ChatGPT",
         "longDescription": "Wapliss connects ChatGPT to your own WhatsApp account.\n\nWhat you can do:\n- Find and read your chats and groups, and get summaries of what was said.\n- See the latest messages you received or sent across all chats.\n- See who is in a group and who wrote each message.\n- Send text, images, documents, audio, video, locations, contact cards and polls, or forward messages.\n\nHow it works: sign in to Wapliss with OAuth, then link your phone once by scanning a QR code in the Wapliss panel (wapliss.com/app/connect). ChatGPT only accesses the WhatsApp account you authorized. Sending always requires a clear request and, when anything is ambiguous, your confirmation. Bulk or unsolicited messaging is not allowed.\n\nWapliss is an independent service and is not affiliated with or endorsed by Meta or WhatsApp.",
-        "developerName": "Wapliss",
+        "developerName": "NetDigitalTech LLC",
         "category": "Communication",
         "capabilities": [
           "List and search your WhatsApp chats and groups",
@@ -101,7 +101,7 @@
         }
       },
       "publication": {
-        "release_notes": "First release: read chats and groups, latest messages, group info, and send text, media, locations, contacts and polls.",
+        "release_notes": "Wapliss is developed and operated by NetDigitalTech LLC. Same tools as 1.0.1: read chats and groups, latest messages, group info, and send text, media, locations, contacts and polls.",
         "translations": {
           "es": {
             "subtitle": "Tu WhatsApp en ChatGPT",
