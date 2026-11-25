@@ -60,28 +60,28 @@
               "expected_behavior": "Calls get_chats with a small limit and lists the 5 chats with name, type (individual or group), last message and unread count, without raw JSON."
             },
             {
-              "description": "Read and summarize one chat",
-              "prompt": "Read my last 10 messages with Demo Contact and summarize them",
+              "description": "Read and summarize the most recent chat",
+              "prompt": "Read the last 10 messages of my most recent WhatsApp chat and summarize them",
               "tools_triggered": "get_chats, get_chat_history",
-              "expected_behavior": "Finds the chat with get_chats (query), reads it with get_chat_history (limit 10) and returns a short summary in chronological order."
+              "expected_behavior": "Gets the most recent chat with get_chats, reads it with get_chat_history (limit 10) and returns a short summary in chronological order."
             },
             {
-              "description": "Summarize a group with authors",
-              "prompt": "What did people say in the Demo Group today? Tell me who said what",
-              "tools_triggered": "get_chats, get_chat_history",
-              "expected_behavior": "Finds the group, reads its history and summarizes the messages naming the sender of each one."
+              "description": "Latest incoming messages",
+              "prompt": "Show my latest incoming WhatsApp messages",
+              "tools_triggered": "get_last_incoming_messages",
+              "expected_behavior": "Lists the latest received messages across chats with sender, chat and time."
             },
             {
-              "description": "Latest incoming messages and group members",
-              "prompt": "Show my latest incoming WhatsApp messages and then who is in the Demo Group",
-              "tools_triggered": "get_last_incoming_messages, get_group",
-              "expected_behavior": "Lists the latest received messages across chats, then shows the group name, description, admins and participant count."
+              "description": "Group members",
+              "prompt": "Who is in my most recent WhatsApp group?",
+              "tools_triggered": "get_chats, get_group",
+              "expected_behavior": "Finds the most recent group with get_chats and shows its name, admins and participant count with get_group."
             },
             {
-              "description": "Send a text with a clear recipient",
-              "prompt": "Send 'Hello from ChatGPT' to Demo Contact on WhatsApp",
-              "tools_triggered": "get_chats, send_text_message",
-              "expected_behavior": "Resolves the recipient with get_chats, confirms recipient and text if there is any ambiguity, calls send_text_message and reports that the message was queued (not that it was delivered)."
+              "description": "Send a text to the account's own number",
+              "prompt": "Check my Wapliss account and send 'Hello from ChatGPT' to my own WhatsApp number",
+              "tools_triggered": "get_account_status, send_text_message",
+              "expected_behavior": "Reads the connected number with get_account_status, confirms recipient and text, calls send_text_message to that same number and reports that the message was queued (not that it was delivered)."
             }
           ],
           "negative": [
@@ -101,7 +101,7 @@
         }
       },
       "publication": {
-        "release_notes": "Wapliss is developed and operated by NetDigitalTech LLC. Same tools as 1.0.1: read chats and groups, latest messages, group info, and send text, media, locations, contacts and polls.",
+        "release_notes": "Wapliss is developed and operated by NetDigitalTech LLC. Same tools as 1.0.1. Test cases updated for the reviewer account: send tests go only to the account's own number.",
         "translations": {
           "es": {
             "subtitle": "Tu WhatsApp en ChatGPT",
